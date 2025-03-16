@@ -9,17 +9,17 @@
 ### 👉 One-liner (if you trust me):
 
 ```bash
-curl -fsSL https://dotfiles.wook.kr/etc/install | bash
+curl -fsSL https://dotfiles.rrt.ca/etc/install | bash
 ```
 
 <details><summary>
-💡 (Tip) You only need to remember <code>curl dotfiles.wook.kr</code> (Click to expand)
+💡 (Tip) You only need to remember <code>curl dotfiles.rrt.ca</code> (Click to expand)
 </summary></p>
 
-* Every file is accessible through `dotfiles.wook.kr` (via `curl -L` or `wget`), e.g.,
-  * https://dotfiles.wook.kr/vimrc
-  * https://dotfiles.wook.kr/vimrc?raw=true
-  * https://dotfiles.wook.kr/bin/tb
+* Every file is accessible through `dotfiles.rrt.ca` (via `curl -L` or `wget`), e.g.,
+  * https://dotfiles.rrt.ca/vimrc
+  * https://dotfiles.rrt.ca/vimrc?raw=true
+  * https://dotfiles.rrt.ca/bin/tb
 
 <p></details>
 
@@ -28,7 +28,7 @@ curl -fsSL https://dotfiles.wook.kr/etc/install | bash
 </summary><p>
 
 ```bash
-$ git clone --recursive https://github.com/wookayin/dotfiles.git ~/.dotfiles
+$ git clone --recursive https://github.com/rrtca/dotfiles.git ~/.dotfiles
 $ cd ~/.dotfiles && python install.py
 ```
 
@@ -100,11 +100,11 @@ $ dotfiles install ripgrep        # -> ~/.local/bin/rg
       i.e. the python3 on conda, virtualenv, etc.
       This should have been automatically installed.
       If it doesn't work, check `which python3`. Use the following vim command to tell which host python is used:
-          [`:echo g:python3_host_prog`](https://github.com/wookayin/dotfiles/blob/master/nvim/init.vim).
+          [`:echo g:python3_host_prog`](https://github.com/rrtca/dotfiles/blob/master/nvim/init.vim).
       * If you are not sure, manually running `python3 -m pip install --user pynvim` might help.
 
 * Does vim color look weird (e.g. only black-and-white)?
-  * Check whether your terminal emulator supports [24-bit color](https://github.com/wookayin/dotfiles/pull/9). Use iTerm2, wezterm, or kitty; NOT built-in Terminal.
+  * Check whether your terminal emulator supports [24-bit color](https://github.com/rrtca/dotfiles/pull/9). Use iTerm2, wezterm, or kitty; NOT built-in Terminal.
   * Latest Mosh (1.4.0+) support 24-bit colors, so try upgrading mosh if you are using it.
   * Try `:set notermguicolors` to temporarily disable 24-bit colors.
 * Does tmux look weird? Make sure that tmux version is [2.3](etc/ubuntu-setup.sh) or higher.
@@ -114,9 +114,9 @@ $ dotfiles install ripgrep        # -> ~/.local/bin/rg
 
 
 [neovim]: https://github.com/neovim/neovim
-[dotfiles-update]: https://github.com/wookayin/dotfiles/blob/master/bin/dotfiles
-[linux-locals.sh]: https://github.com/wookayin/dotfiles/blob/master/etc/linux-locals.sh
-[install.py]: https://github.com/wookayin/dotfiles/blob/master/install.py
+[dotfiles-update]: https://github.com/rrtca/dotfiles/blob/master/bin/dotfiles
+[linux-locals.sh]: https://github.com/rrtca/dotfiles/blob/master/etc/linux-locals.sh
+[install.py]: https://github.com/rrtca/dotfiles/blob/master/install.py
 
 
 ## License
@@ -124,3 +124,5 @@ $ dotfiles install ripgrep        # -> ~/.local/bin/rg
 [The MIT License (MIT)](LICENSE)
 
 Copyright (c) 2012-2025 Jongwook Choi (@wookayin)
+Copyright (c) 2025 Ryan Thompson (@rrtca)
+

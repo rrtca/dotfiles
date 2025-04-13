@@ -1,123 +1,203 @@
-
 # Dotfiles
 
 🏠 Personal dotfiles for \*NIX (macOS and Linux) systems.
 
+## Features
 
-## Installation
+- 🐚 Multiple shell support (Bash, Fish, Zsh)
+- 🔄 Smooth shell transition
+- 🎯 Comprehensive command completions
+- 🛠️ Easy installation and updates
+- 🔒 Secure configuration management
+- 📦 Package management integration
+- 🤖 AI CLI tools integration
 
-### 👉 One-liner (if you trust me):
+## Quick Start
+
+### Installation
 
 ```bash
+# One-liner installation
 curl -fsSL https://dotfiles.rrt.ca/etc/install | bash
+
+# Manual installation
+git clone --recursive https://github.com/rrtca/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles && make install
 ```
 
-<details><summary>
-💡 (Tip) You only need to remember <code>curl dotfiles.rrt.ca</code> (Click to expand)
-</summary></p>
+### Makefile Commands
 
-* Every file is accessible through `dotfiles.rrt.ca` (via `curl -L` or `wget`), e.g.,
-  * https://dotfiles.rrt.ca/vimrc
-  * https://dotfiles.rrt.ca/vimrc?raw=true
-  * https://dotfiles.rrt.ca/bin/tb
-
-<p></details>
-
-<details><summary>
-🤔 Want to manually clone and install? (Click to expand)
-</summary><p>
+The repository includes a Makefile with useful commands:
 
 ```bash
-$ git clone --recursive https://github.com/rrtca/dotfiles.git ~/.dotfiles
-$ cd ~/.dotfiles && python install.py
+make help              # Show all available commands
+make install          # Run installer
+make update          # Pull updates and run installer
+make clean           # Clean temporary files
+make completions     # Install shell completions
+make fish            # Install fish configuration
+make bash            # Install bash configuration
+make test            # Run tests
+make backup          # Create backup of current dotfiles
 ```
 
-<!--
-Note: The option `-j8` (`--jobs 8`) works with Git >= 2.8 (parallel submodule fetching).
-For older versions of Git, try without `-j` option.
--->
+## Shell Configuration
 
-</p></details>
+### Bash (Primary Shell)
 
-<br>
+- Custom prompt with git integration
+- Platform-specific configurations
+- Comprehensive aliases and functions
+- Command completion system
 
+### Fish Shell
 
-The installation script will clone the repository into `~/.dotfiles` and create symbolic links (e.g., `~/.vimrc`) for you.
-If target files already exist (e.g. `~/.vim`, `~/.vimrc`), you will need to manually resolve the conflict (delete the old one or just ignore). See Troubleshooting below for details.
+- Modern syntax highlighting
+- Autosuggestions
+- Git integration
+- Vi-style key bindings
+- Environment variable management
 
+### Shell Transition
 
-## `$ dotfiles`
+Features to ensure smooth transition between shells:
 
-**To update dotfiles** (pull changes from upstream and run [`install.py`][install.py] again):
+1. **Shared Environment**:
+   - Synchronized environment variables
+   - Common aliases and functions
+   - Consistent platform detection
+
+2. **Shell Switching**:
+   ```bash
+   # Switch to fish
+   switch_shell fish
+   
+   # Switch back to bash
+   switch_shell bash
+   ```
+
+3. **Environment Sync**:
+   ```bash
+   # Sync environment variables
+   sync_env
+   ```
+
+## Command Completions
+
+The repository includes a unified completion system:
+
+1. **Available Completions**:
+   - Git commands and options
+   - Project management
+   - Custom commands
+
+2. **Installation**:
+   ```bash
+   make completions
+   ```
+
+3. **Adding New Completions**:
+   ```bash
+   # 1. Create fish completion
+   vim completions/fish/new_command.fish
+   
+   # 2. Create bash completion
+   vim completions/bash/new_command.bash
+   
+   # 3. Install completions
+   make completions
+   ```
+
+## Package Management
+
+### Linux (Local Installation)
+
+Install common tools without sudo:
 
 ```bash
-$ dotfiles update
-$ dotfiles update --fast          # fast update mode: skip updating {vim,zsh} plugins
+make install neovim     # -> ~/.local/bin/nvim
+make install ripgrep    # -> ~/.local/bin/rg
 ```
 
-On Linux, you can [install some common softwares locally][linux-locals.sh] (into `$HOME/.local/bin`) *without sudo*:
+### macOS
 
 ```bash
-$ dotfiles install neovim         # -> ~/.local/bin/nvim
-$ dotfiles install ripgrep        # -> ~/.local/bin/rg
+brew install fish neovim ripgrep
 ```
 
+## AI Tools
 
+The repository includes installation targets for popular AI CLI tools:
 
-## 🆘 Troubleshooting
+### Available Tools
 
-*Please read carefully warning messages during installation !!*
+- **aider**: AI pair programming tool
+- **gpt-cli**: GPT command line interface
+- **shell-gpt**: Shell integration with GPT
+- **chatgpt-cli**: ChatGPT command line interface
 
-* If something goes wrong, please run **[`$ dotfiles update`][dotfiles-update]** (or [install.py]) to make everything up-to-date.
-    * Please carefully READ the error/warning message printed by the installation script.
-    * If you have your own `~/.zshrc`, `~/.vimrc`, `~/.vim`, etc., that are NOT symbolic links,
-      they will not be overwritten by default.
-      In such cases you should delete these files *manually*.
+### Installation
 
-* Q: I see some weird icons like `⍰` in (neo)vim or in the [statusline](https://github.com/powerline/powerline#vim-statusline).
-  - A: Use [Nerd fonts](https://github.com/ryanoasis/nerd-fonts) v3. If you haven't upgrade to Nerd fonts [**v3.1.1** or higher](https://github.com/ryanoasis/nerd-fonts/releases/tag/v3.1.1), upgrade to v3 due to the new (breaking) Material Design Icons codepoints.
-    - Note: `JetBrainsMono Nerd Font Mono` ~~`JetBrainsMono NFM`~~ (nerd-fonts [v3.1.0 is buggy](https://github.com/ryanoasis/nerd-fonts/issues/1434))
-  - Mac users can install via: `brew install --cask font-*-nerd-font`.
-    - (Minimal fonts only `brew install --cask font-jetbrains-mono-nerd-font`)
-  - To upgrade existing installations, try `brew reinstall --cask $(brew list | grep nerd-font)`.
+```bash
+# Install all AI tools
+make ai-tools
 
-* If neovim + treesitter emits an error like `query: invalid node type`, run `:TSUpdate` (and wait for installation is done).
-  * See [nvim-treesitter#3092](https://github.com/nvim-treesitter/nvim-treesitter/issues/3092) for more details.
+# Install specific tools
+make aider          # Install aider
+make gpt-cli        # Install gpt-cli
+make shell-gpt      # Install shell-gpt
+make chatgpt-cli    # Install chatgpt-cli
+```
 
-* If neovim cannot run due to `version 'GLIBC_2.29' not found` errors (on Ubuntu 18.04 or earlier),
-  you should upgrade your Ubuntu distribution to 20.04+ in order to run nvim 0.8.x or higher.
-  If you use [appimage](https://github.com/neovim/neovim/releases/tag/stable) binary of neovim,
-  this will work in Ubuntu 18.04; install neovim through `dotfiles install neovim` or `NEOVIM_VERSION=0.9.4 dotfiles install neovim`.
+### Distribution Files
 
-* If [**neovim**][neovim] emits any startup errors (e.g. `no module named neovim`):
-    * Use **latest neovim** (e.g., neovim 0.9.5).
-      To install/upgrade neovim on your system, you can run `dotfiles install neovim` (linux) or `brew install neovim` (mac).
-    * Try `:checkhealth`.
-    * Try `:Lazy update`: some errors from vim plugin could be easily solved by updating plugins to date.
-      You can do `:Lazy update` (in vim) or `$ dotfiles update` (in zsh).
-    * We require python3 version not less than 3.6. See https://endoflife.date/python
-    * Make sure that the [`pynvim`](https://pypi.python.org/pypi/pynvim/) pypi package is installed on *local* python 3,
-      i.e. the python3 on conda, virtualenv, etc.
-      This should have been automatically installed.
-      If it doesn't work, check `which python3`. Use the following vim command to tell which host python is used:
-          [`:echo g:python3_host_prog`](https://github.com/rrtca/dotfiles/blob/master/nvim/init.vim).
-      * If you are not sure, manually running `python3 -m pip install --user pynvim` might help.
+The installation process:
+1. Downloads distribution files to `~/.local/share/ai-tools/dist/`
+2. Installs tools from local distribution files
+3. Maintains offline installation capability
 
-* Does vim color look weird (e.g. only black-and-white)?
-  * Check whether your terminal emulator supports [24-bit color](https://github.com/rrtca/dotfiles/pull/9). Use iTerm2, wezterm, or kitty; NOT built-in Terminal.
-  * Latest Mosh (1.4.0+) support 24-bit colors, so try upgrading mosh if you are using it.
-  * Try `:set notermguicolors` to temporarily disable 24-bit colors.
-* Does tmux look weird? Make sure that tmux version is [2.3](etc/ubuntu-setup.sh) or higher.
-    * Run `$ dotfiles install tmux` to install `tmux` into `$HOME/.local/bin`, if you do not have sudo.
-* If you are still lost, or you've found a bug, please feel free to contact me or raise an issue ---
-  I will happy to assist.
+To clean distribution files:
+```bash
+make ai-tools-clean
+```
 
+### Usage Examples
 
-[neovim]: https://github.com/neovim/neovim
-[dotfiles-update]: https://github.com/rrtca/dotfiles/blob/master/bin/dotfiles
-[linux-locals.sh]: https://github.com/rrtca/dotfiles/blob/master/etc/linux-locals.sh
-[install.py]: https://github.com/rrtca/dotfiles/blob/master/install.py
+```bash
+# Using aider for pair programming
+aider myfile.py
 
+# Using gpt-cli for quick queries
+gpt "how to sort a list in python"
+
+# Using shell-gpt for shell commands
+sgpt "find all files modified in the last 24 hours"
+
+# Using chatgpt-cli for interactive chat
+chatgpt
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **File Conflicts**:
+   - If target files exist, resolve conflicts manually
+   - Use `make backup` to create backups before installation
+
+2. **Font Issues**:
+   - Install [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) v3.1.1+
+   - Recommended: `JetBrainsMono Nerd Font Mono`
+
+3. **Shell Issues**:
+   - Run `make test` to check for common problems
+   - Use `make update` to ensure everything is up-to-date
+
+### Getting Help
+
+- Check the [issues](https://github.com/rrtca/dotfiles/issues) page
+- Run `make test` to diagnose problems
+- Use `make backup` before making changes
 
 ## License
 
@@ -125,4 +205,3 @@ $ dotfiles install ripgrep        # -> ~/.local/bin/rg
 
 Copyright (c) 2012-2025 Jongwook Choi (@wookayin)
 Copyright (c) 2025 Ryan Thompson (@rrtca)
-
